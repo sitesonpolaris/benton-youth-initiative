@@ -85,7 +85,7 @@ export const road = [
     id: "fairs",
     title: "Meet the colleges",
     body: "At college fairs and admissions sessions, students talk face to face with recruiters, deans and coaches, and learn what each school is looking for.",
-    image: "/images/college-fair-clinton.jpg",
+    image: "/images/college-fair-clinton-edited.jpg",
     alt: "James Benton at a Clinton College recruiting table at a college fair",
     caption: "College fair, Clinton College table",
   },
@@ -98,7 +98,7 @@ export const road = [
     caption: "Mentees, dressed for the next step",
   },
   {
-    id: "graduate",
+    id: "graduate", 
     title: "Walk across the stage",
     body: "We stay in touch through high school graduation and beyond, with mentors, check-ins and a community that shows up for every milestone.",
     image: "/images/grad-ncat.jpg",
