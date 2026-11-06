@@ -44,8 +44,8 @@ export function NetlifyForm({
 
   if (status === "sent") {
     return (
-      <div role="status" className="bg-gold p-8 text-navy-900 sm:p-10">
-        <p className="font-display text-3xl font-bold">{successTitle}</p>
+      <div role="status" className="bg-gold p-8 text-midnight sm:p-10">
+        <p className="font-heading text-3xl font-bold">{successTitle}</p>
         <p className="mt-3 text-xl">{successBody}</p>
       </div>
     );
@@ -63,12 +63,12 @@ export function NetlifyForm({
       <button
         type="submit"
         disabled={status === "sending"}
-        className="bg-navy px-8 py-4 font-display text-lg font-bold text-white transition-[background-color,transform] hover:bg-navy-900 active:scale-[0.97] disabled:opacity-60"
+        className="bg-navy px-8 py-4 font-heading text-lg font-bold text-white transition-[background-color,transform] hover:bg-midnight active:scale-[0.97] disabled:opacity-60"
       >
         {status === "sending" ? "Sending…" : submitLabel}
       </button>
       {status === "error" && (
-        <p role="alert" className="text-lg font-semibold text-red-800">
+        <p role="alert" className="text-lg font-semibold text-[#9b1c1c]">
           Something went wrong sending the form. Please try again, or call us.
         </p>
       )}
@@ -77,7 +77,7 @@ export function NetlifyForm({
 }
 
 const inputCls =
-  "mt-2 block w-full border-2 border-navy-100 bg-white px-4 py-3 text-lg text-ink transition-colors focus:border-navy focus:outline-none";
+  "mt-2 block w-full border-2 border-paper-deep bg-white px-4 py-3 text-lg text-ink transition-colors focus:border-navy focus:outline-none";
 
 export function Field({
   label,
@@ -96,7 +96,7 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="font-display text-lg font-semibold text-navy">
+      <span className="font-heading text-lg font-semibold text-navy">
         {label}
         {!required && <span className="font-sans font-normal text-ink-soft"> (optional)</span>}
       </span>
@@ -120,7 +120,7 @@ export function Select({
 }) {
   return (
     <label className="block">
-      <span className="font-display text-lg font-semibold text-navy">{label}</span>
+      <span className="font-heading text-lg font-semibold text-navy">{label}</span>
       <select name={name} required={required} defaultValue={defaultValue ?? ""} className={inputCls}>
         <option value="" disabled>
           Choose one
@@ -136,7 +136,7 @@ export function Select({
 export function TextArea({ label, name, required }: { label: string; name: string; required?: boolean }) {
   return (
     <label className="block">
-      <span className="font-display text-lg font-semibold text-navy">
+      <span className="font-heading text-lg font-semibold text-navy">
         {label}
         {!required && <span className="font-sans font-normal text-ink-soft"> (optional)</span>}
       </span>
@@ -148,10 +148,10 @@ export function TextArea({ label, name, required }: { label: string; name: strin
 export function Checks({ legend, name, options }: { legend: string; name: string; options: string[] }) {
   return (
     <fieldset>
-      <legend className="font-display text-lg font-semibold text-navy">{legend}</legend>
+      <legend className="font-heading text-lg font-semibold text-navy">{legend}</legend>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {options.map((o) => (
-          <label key={o} className="flex cursor-pointer items-center gap-3 bg-navy-50 px-4 py-3 text-lg">
+          <label key={o} className="flex cursor-pointer items-center gap-3 bg-paper px-4 py-3 text-lg">
             <input type="checkbox" name={name} value={o} className="size-5 accent-navy" />
             {o}
           </label>

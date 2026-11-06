@@ -8,9 +8,17 @@ import { nav } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const overHero = pathname === "/" && !scrolled && !open;
 
   useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -19,24 +27,25 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 bg-navy text-white">
-      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 text-white transition-colors duration-300 ${
+        overHero ? "bg-transparent" : "bg-midnight"
+      }`}
+    >
+      <div className="mx-auto flex h-18 max-w-[90rem] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
         <Link href="/" className="flex items-center gap-3" aria-label="Benton Youth Initiative home">
-          <Image src="/images/byi-crest.png" alt="" aria-hidden="true" width={44} height={44} priority className="size-11" />
-          <span className="font-display text-lg font-bold leading-tight tracking-tight">
+          <Image src="/images/byi-crest.png" alt="" aria-hidden="true" width={46} height={46} priority className="size-11.5" />
+          <span className="display text-[1.375rem] leading-none tracking-wide">
             Benton Youth
-            <br className="sm:hidden" /> Initiative
+            <br /> Initiative
           </span>
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
-          <ul className="flex items-center gap-8 font-display text-[1.0625rem] font-semibold">
+          <ul className="flex items-center gap-8 font-heading text-[1.0625rem] font-semibold">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="relative py-2 text-white/85 transition-colors hover:text-gold"
-                >
+                <Link href={item.href} className="py-2 text-white/85 transition-colors hover:text-gold">
                   {item.label}
                 </Link>
               </li>
@@ -44,16 +53,16 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Link
             href="/apply"
-            className="hidden font-display font-semibold text-white transition-colors hover:text-gold md:inline-block md:px-3"
+            className="hidden px-4 py-2.5 font-heading font-bold text-white ring-2 ring-white/40 ring-inset transition-[box-shadow,color] hover:text-gold hover:ring-gold sm:inline-block"
           >
             Apply
           </Link>
           <Link
             href="/#donate"
-            className="bg-gold px-5 py-2.5 font-display font-bold text-navy-900 transition-[background-color,transform] duration-150 hover:bg-white active:scale-[0.97]"
+            className="bg-gold px-5 py-2.5 font-heading font-bold text-midnight transition-[background-color,transform] duration-150 hover:bg-white active:scale-[0.97]"
           >
             Donate
           </Link>
@@ -65,11 +74,11 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
           >
             <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
               {open ? (
                 <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="2.25" />
               ) : (
-                <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" strokeWidth="2.25" />
+                <path d="M3 7h18M3 12h18M3 17h12" stroke="currentColor" strokeWidth="2.25" />
               )}
             </svg>
           </button>
@@ -79,12 +88,12 @@ export function Header() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="fixed inset-x-0 bottom-0 top-18 overflow-y-auto bg-navy-900 px-5 pb-10 pt-6 sm:px-8 lg:hidden"
+        className="fixed inset-x-0 bottom-0 top-18 overflow-y-auto bg-midnight px-5 pb-10 pt-4 sm:px-8 lg:hidden"
       >
-        <ul className="font-display text-3xl font-bold">
+        <ul>
           {[...nav, { href: "/apply", label: "Apply" }].map((item) => (
             <li key={item.href}>
-              <Link href={item.href} className="block py-3 hover:text-gold" onClick={() => setOpen(false)}>
+              <Link href={item.href} className="display block py-3 text-5xl hover:text-gold" onClick={() => setOpen(false)}>
                 {item.label}
               </Link>
             </li>

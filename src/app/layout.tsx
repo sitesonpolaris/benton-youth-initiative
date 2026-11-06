@@ -16,6 +16,15 @@ const cabin = localFont({
   display: "swap",
 });
 
+const cabinCondensed = localFont({
+  src: [
+    { path: "./fonts/cabin-condensed-latin-600-normal.woff2", weight: "600" },
+    { path: "./fonts/cabin-condensed-latin-700-normal.woff2", weight: "700" },
+  ],
+  variable: "--font-cabin-condensed",
+  display: "swap",
+});
+
 const sourceSans = localFont({
   src: [
     { path: "./fonts/source-sans-3-latin-400-normal.woff2", weight: "400" },
@@ -30,11 +39,11 @@ const sourceSans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Benton Youth Initiative | College access for first-generation students",
+    default: "Benton Youth Initiative | Your campus is waiting",
     template: "%s | Benton Youth Initiative",
   },
   description:
-    "Benton Youth Initiative (BYI) is a North Carolina nonprofit that partners with Title I schools to get first-generation and at-risk students onto HBCU campuses and into college.",
+    "Benton Youth Initiative (BYI) is a North Carolina nonprofit that takes first-generation and Title I high school students on HBCU campus tours and helps them apply, get funded and graduate.",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
@@ -65,7 +74,7 @@ const orgSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cabin.variable} ${sourceSans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${cabin.variable} ${cabinCondensed.variable} ${sourceSans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <script
@@ -76,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-gold focus:px-4 focus:py-2 focus:text-navy-900"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-gold focus:px-4 focus:py-2 focus:text-midnight"
         >
           Skip to content
         </a>

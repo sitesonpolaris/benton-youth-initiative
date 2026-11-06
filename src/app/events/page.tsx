@@ -2,43 +2,42 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { pastEvents } from "@/lib/site";
+import { events } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/events" },
   title: "Events",
-  description: "HBCU campus tours, family workshops, the All White Gala and community service days with Benton Youth Initiative.",
+  description:
+    "HBCU campus tours, the All White Party fundraiser, homecoming service days and Youth Sunday with Benton Youth Initiative.",
 };
 
-const gallery = [
-  { src: "/images/nc-at-visit.jpg", alt: "BYI students and James Benton at North Carolina A&T", caption: "Campus visit, North Carolina A&T", wide: true },
-  { src: "/images/church-sunday.jpg", alt: "BYI young men with mentors and pastors at church", caption: "Youth Sunday with our church partners" },
-  { src: "/images/campus-dining-hall.jpg", alt: "BYI students in a college student union", caption: "Lunch in the student union on a college tour" },
-  { src: "/images/community-service.jpg", alt: "Students with neighbors after a service visit", caption: "Community service day", wide: true },
-];
+const d = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
 export default function EventsPage() {
   return (
     <>
       <PageHero
-        title="Events"
-        intro="Campus tours, workshops and celebrations that get students moving toward college, and get the community behind them."
+        title="Tours & events"
+        intro="Campus tours, celebrations and service days that get students moving toward college, and get the community behind them."
+        image="/images/homecoming-service.jpg"
+        alt="BYI students carrying supplies beside a passenger van during a homecoming service day"
+        position="50% 60%"
       />
 
       <section aria-labelledby="upcoming-title" className="py-24 lg:py-32">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-12">
-          <h2 id="upcoming-title" data-reveal className="text-4xl font-bold leading-tight text-navy sm:text-6xl lg:col-span-5">
-            Upcoming events
+        <div className="mx-auto grid max-w-[90rem] gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
+          <h2 id="upcoming-title" data-reveal className="display text-6xl text-navy sm:text-8xl lg:col-span-5">
+            Coming up
           </h2>
-          <div data-reveal style={{ "--i": 1 } as React.CSSProperties} className="bg-gold p-8 text-navy-900 sm:p-10 lg:col-span-7">
-            <p className="font-display text-3xl font-bold leading-tight">New dates are coming soon.</p>
+          <div data-reveal style={d(1)} className="bg-gold p-8 text-midnight sm:p-12 lg:col-span-7">
+            <p className="display text-5xl">New tour dates are on the way.</p>
             <p className="mt-4 text-xl">
               We&apos;re scheduling the next round of HBCU tours and family workshops. Leave your
               details and we&apos;ll send dates as soon as they&apos;re set.
             </p>
             <Link
               href="/contact?topic=events"
-              className="mt-8 inline-flex bg-navy px-6 py-3.5 font-display text-lg font-bold text-white transition-[background-color,transform] hover:bg-navy-900 active:scale-[0.97]"
+              className="mt-8 inline-flex bg-midnight px-7 py-4 font-heading text-lg font-bold text-white transition-[background-color,transform] hover:bg-navy active:scale-[0.97]"
             >
               Get event updates
             </Link>
@@ -46,28 +45,25 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="past-title" className="bg-navy-50 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <h2 id="past-title" data-reveal className="text-4xl font-bold leading-tight text-navy sm:text-6xl">
-            What we&apos;ve done together
+      <section aria-labelledby="past-title" className="bg-navy py-24 text-white lg:py-36">
+        <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
+          <h2 id="past-title" data-reveal className="display text-6xl sm:text-8xl">
+            What we do together
           </h2>
-          <ul className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {pastEvents.map((e, i) => (
-              <li key={e.title} data-reveal style={{ "--i": i } as React.CSSProperties} className="border-t-8 border-gold pt-5">
-                <h3 className="text-2xl font-bold text-navy">{e.title}</h3>
-                <p className="mt-2 text-lg">{e.body}</p>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-16 grid gap-3 sm:grid-cols-3">
-            {gallery.map((g, i) => (
-              <figure key={g.src} data-reveal style={{ "--i": i } as React.CSSProperties} className={g.wide ? "sm:col-span-2" : ""}>
-                <div className="relative aspect-[4/3] overflow-hidden sm:aspect-auto sm:h-[26rem]">
-                  <Image src={g.src} alt={g.alt} fill sizes="(min-width: 640px) 66vw, 100vw" className="object-cover" />
+          <div className="mt-16 space-y-20">
+            {events.map((e, i) => (
+              <article key={e.id} className="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
+                <div data-reveal="scale" className={`relative aspect-[4/3] overflow-hidden bg-midnight lg:col-span-6 ${i % 2 ? "lg:order-2" : ""}`}>
+                  <Image src={e.image} alt={e.alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
                 </div>
-                <figcaption className="mt-2 text-base text-ink-soft">{g.caption}</figcaption>
-              </figure>
+                <div data-reveal style={d(1)} className="lg:col-span-6">
+                  <p className="font-heading text-lg font-bold text-gold">
+                    {e.when} · {e.where}
+                  </p>
+                  <h3 className="display mt-2 text-5xl sm:text-6xl">{e.title}</h3>
+                  <p className="mt-4 max-w-xl text-xl text-white/90">{e.body}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>

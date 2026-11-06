@@ -16,23 +16,24 @@ export default function ApplyPage() {
       <PageHero
         title="Apply to BYI"
         intro="The first step toward college takes about five minutes. Tell us about yourself and we'll be in touch within a week."
-        image="/images/campus-dining-hall.jpg"
-        alt="BYI students during a college campus visit"
+        image="/images/nccu-visit.jpg"
+        alt="BYI students with James Benton on a campus visit to North Carolina Central University"
+        position="50% 35%"
       />
-      <section aria-labelledby="form-title" className="py-24 lg:py-32">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+      <section aria-labelledby="form-title" className="py-24 lg:py-36">
+        <div className="mx-auto grid max-w-[90rem] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:px-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <h2 id="form-title" className="text-4xl font-bold leading-tight text-navy sm:text-5xl">
+            <h2 id="form-title" className="display text-6xl text-navy sm:text-7xl">
               Your application
             </h2>
-            <h3 className="mt-10 text-2xl font-bold text-navy">Who should apply</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-lg marker:text-gold-600">
+            <h3 className="mt-10 font-heading text-2xl font-bold text-navy">Who should apply</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-lg marker:text-gold-deep">
               <li>High school students planning for college</li>
               <li>First-generation college students</li>
               <li>Students at Title I schools</li>
               <li>Students anywhere in the U.S. are welcome</li>
             </ul>
-            <h3 className="mt-10 text-2xl font-bold text-navy">What happens next</h3>
+            <h3 className="mt-10 font-heading text-2xl font-bold text-navy">What happens next</h3>
             <p className="mt-3 text-lg">
               A BYI team member calls you and your parent or guardian to talk about your goals, then
               invites you to the next campus tour.

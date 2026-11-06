@@ -16,24 +16,26 @@ export default function ContactPage() {
       <PageHero
         title="Contact BYI"
         intro="Parents, students, schools, churches and supporters: we'd love to hear from you."
+        image="/images/hall-group.jpg"
+        alt="A large group of BYI students and mentors gathered in a banquet hall"
       />
-      <section aria-labelledby="contact-title" className="py-24 lg:py-32">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+      <section aria-labelledby="contact-title" className="py-24 lg:py-36">
+        <div className="mx-auto grid max-w-[90rem] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:px-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <h2 id="contact-title" className="text-4xl font-bold leading-tight text-navy sm:text-5xl">
+            <h2 id="contact-title" className="display text-6xl text-navy sm:text-7xl">
               Reach us directly
             </h2>
             <dl className="mt-8 space-y-6 text-lg">
               <div>
-                <dt className="font-display font-bold text-navy">Call</dt>
+                <dt className="font-heading font-bold text-navy">Call</dt>
                 <dd><a className="text-2xl font-semibold underline decoration-gold decoration-4 underline-offset-4" href={site.phoneHref}>{site.phone}</a></dd>
               </div>
               <div>
-                <dt className="font-display font-bold text-navy">Email</dt>
+                <dt className="font-heading font-bold text-navy">Email</dt>
                 <dd><a className="break-all underline decoration-gold decoration-2 underline-offset-4" href={`mailto:${site.email}`}>{site.email}</a></dd>
               </div>
               <div>
-                <dt className="font-display font-bold text-navy">Follow</dt>
+                <dt className="font-heading font-bold text-navy">Follow</dt>
                 <dd className="flex gap-5">
                   <a className="underline decoration-gold decoration-2 underline-offset-4" href={site.social.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
                   <a className="underline decoration-gold decoration-2 underline-offset-4" href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>

@@ -1,13 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroVideo } from "@/components/HeroVideo";
+import { PennantWall } from "@/components/PennantWall";
 import { PathPicker } from "@/components/PathPicker";
 import { DonateBlock } from "@/components/DonateBlock";
-import { audiences, impact, pastEvents, programs, site } from "@/lib/site";
+import { CountUp } from "@/components/CountUp";
+import { audiences, events, graduates, impact, road, shortcuts, site } from "@/lib/site";
 
-function Arrow() {
+type CSSVars = React.CSSProperties & { "--i"?: number };
+const d = (i: number): CSSVars => ({ "--i": i });
+
+function Arrow({ className = "" }: { className?: string }) {
   return (
-    <svg aria-hidden="true" width="16" height="16" viewBox="0 0 18 18">
-      <path d="M5 2l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.5" />
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" className={className}>
+      <path d="M2 9h12M9 3l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.5" />
     </svg>
   );
 }
@@ -15,289 +21,314 @@ function Arrow() {
 export default function Home() {
   return (
     <>
-      {/* MISSION */}
-      <section aria-labelledby="hero-title" className="relative bg-navy text-white lg:chevron-bottom">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-16 pt-12 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:pb-[calc(6rem+3.5vw)] lg:pt-20">
-          <div className="lg:col-span-6 lg:pt-6">
-            <h1
-              id="hero-title"
-              data-reveal
-              className="text-[2.75rem] font-bold leading-[1.02] tracking-[-0.03em] sm:text-6xl xl:text-[5.25rem]"
+      {/* HERO / MISSION */}
+      <section aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] flex-col justify-end overflow-hidden bg-midnight text-white">
+        <HeroVideo />
+        <div aria-hidden="true" className="absolute inset-0 -z-0 bg-midnight/45 lg:bg-transparent lg:[background:linear-gradient(90deg,rgb(19_28_40/0.85),rgb(19_28_40/0.35)_60%,rgb(19_28_40/0.1))]" />
+        <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 pb-28 pt-36 sm:px-8 lg:px-12 lg:pb-32">
+          <h1 id="hero-title" data-reveal className="display max-w-5xl text-[4.25rem] sm:text-[7rem] lg:text-[10rem]">
+            Your campus is waiting.
+          </h1>
+          <p data-reveal style={d(1)} className="mt-7 max-w-2xl text-xl leading-relaxed text-white/95 sm:text-2xl">
+            Benton Youth Initiative puts first-generation students from Title I high schools on HBCU
+            campuses, then walks with them all the way to graduation day.
+          </p>
+          <div data-reveal style={d(2)} className="mt-10 flex flex-wrap gap-3">
+            <Link
+              href="/apply"
+              className="inline-flex items-center gap-3 bg-gold px-8 py-4 font-heading text-lg font-bold text-midnight transition-[background-color,transform] hover:bg-white active:scale-[0.97]"
             >
-              First in the family. Bound for college.
-            </h1>
-            <p data-reveal style={{ "--i": 1 } as React.CSSProperties} className="mt-8 max-w-xl text-xl leading-relaxed text-white/90 sm:text-[1.375rem]">
-              {site.mission}
-            </p>
-            <div data-reveal style={{ "--i": 2 } as React.CSSProperties} className="mt-10 flex flex-wrap gap-3">
-              <Link
-                href="/apply"
-                className="inline-flex items-center gap-3 bg-gold px-7 py-4 font-display text-lg font-bold text-navy-900 transition-[background-color,transform] hover:bg-white active:scale-[0.97]"
-              >
-                Apply to BYI <Arrow />
-              </Link>
-              <Link
-                href="#what-we-do"
-                className="inline-flex items-center gap-3 bg-navy-700 px-7 py-4 font-display text-lg font-bold text-white transition-[background-color,transform] hover:bg-navy-500 active:scale-[0.97]"
-              >
-                See what we do
-              </Link>
-            </div>
+              Apply to BYI <Arrow />
+            </Link>
+            <Link
+              href="#road"
+              className="inline-flex items-center gap-3 px-8 py-4 font-heading text-lg font-bold text-white ring-2 ring-white/60 ring-inset transition-[box-shadow,color] hover:text-gold hover:ring-gold"
+            >
+              See how it works
+            </Link>
           </div>
-
-          <figure className="lg:col-span-6">
-            <div className="relative aspect-[4/3] overflow-hidden bg-navy-900">
-              <Image
-                src="/images/nc-at-visit.jpg"
-                alt="BYI students and founder James Benton throwing up the Aggie pride sign on a visit to North Carolina A&T"
-                fill
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="hero-photo object-cover object-[50%_40%]"
-              />
-            </div>
-            <figcaption className="mt-3 text-base text-white/75">
-              BYI students with founder James Benton on a campus visit to North Carolina A&amp;T.
-            </figcaption>
-          </figure>
         </div>
       </section>
 
       {/* SHORTCUTS */}
-      <section aria-labelledby="start-title" className="bg-navy-900 py-20 text-white lg:-mt-[3.5vw] lg:pt-[calc(5rem+3.5vw)]">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <h2 id="start-title" data-reveal className="max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">
-            Start here. Where do you fit?
-          </h2>
-          <div data-reveal style={{ "--i": 1 } as React.CSSProperties} className="mt-10">
-            <PathPicker />
+      <nav aria-label="Shortcuts" className="bg-gold text-midnight">
+        <ul className="mx-auto grid max-w-[90rem] grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          {shortcuts.map((s) => (
+            <li key={s.href} className="last:col-span-2 sm:last:col-span-1">
+              <Link
+                href={s.href}
+                className="group flex h-full items-center justify-between gap-3 px-5 py-6 transition-colors hover:bg-gold-deep sm:px-8 lg:px-8"
+              >
+                <span>
+                  <span className="block text-base font-semibold text-midnight/75">{s.note}</span>
+                  <span className="display block text-[1.75rem] sm:text-3xl">{s.label}</span>
+                </span>
+                <Arrow className="shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* MISSION */}
+      <section aria-labelledby="mission-title" className="py-24 lg:py-40">
+        <div className="mx-auto grid max-w-[90rem] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-12">
+          <figure data-reveal="left" className="lg:col-span-5">
+            <div className="relative aspect-square overflow-hidden bg-midnight">
+              <Image
+                src="/images/james-benton.jpg"
+                alt="Portrait of BYI founder James Alex Benton"
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <figcaption className="mt-3 text-base text-ink-soft">James Alex Benton, founder of BYI</figcaption>
+          </figure>
+          <div className="lg:col-span-7">
+            <h2 id="mission-title" data-reveal className="display text-6xl text-navy sm:text-8xl">
+              Our mission
+            </h2>
+            <p data-reveal style={d(1)} className="mt-8 font-heading text-2xl font-semibold leading-snug text-navy sm:text-[2rem]">
+              {site.mission}
+            </p>
+            <p data-reveal style={d(2)} className="mt-6 max-w-2xl text-xl">
+              Mr. Benton grew up in North Carolina with parents and mentors who would not let him
+              fall through the cracks. BYI is how he passes that on: one bus ride, one campus and one
+              student at a time.
+            </p>
+            <Link
+              data-reveal
+              style={d(3)}
+              href="/about"
+              className="mt-8 inline-flex items-center gap-3 font-heading text-lg font-bold text-navy underline decoration-gold decoration-4 underline-offset-8 transition-colors hover:text-navy-600"
+            >
+              Our story <Arrow />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* WHO WE SERVE */}
-      <section aria-labelledby="serve-title" className="py-24 lg:py-36">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <h2 id="serve-title" data-reveal className="text-4xl font-bold leading-tight text-navy sm:text-6xl">
+      <section aria-labelledby="serve-title" className="bg-navy text-white">
+        <div className="relative h-[42vh] min-h-72 overflow-hidden lg:h-[60vh]">
+          <Image
+            src="/images/hall-group.jpg"
+            alt="A large group of BYI students and mentors gathered in a banquet hall"
+            fill
+            sizes="100vw"
+            className="object-cover object-[50%_45%]"
+          />
+        </div>
+        <div className="mx-auto max-w-[90rem] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+          <div className="grid gap-8 lg:grid-cols-12">
+            <h2 id="serve-title" data-reveal className="display text-6xl sm:text-8xl lg:col-span-6">
               Who we serve
             </h2>
-            <p data-reveal style={{ "--i": 1 } as React.CSSProperties} className="mt-6 text-xl">
-              BYI works with high school students in North Carolina who have the drive for college but
-              not the roadmap. Students from anywhere in the United States are welcome to apply.
+            <p data-reveal style={d(1)} className="text-xl text-white/90 lg:col-span-6 lg:pt-4">
+              High school students with the drive for college and no roadmap yet. Most come from North
+              Carolina, and students from anywhere in the United States are welcome to apply.
             </p>
-            <div data-reveal style={{ "--i": 2 } as React.CSSProperties} className="relative mt-10 aspect-square overflow-hidden">
-              <Image
-                src="/images/church-sunday.jpg"
-                alt="Young men from BYI standing with mentors, pastors and church members at the front of a sanctuary"
-                fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
-              />
-            </div>
           </div>
-          <ul className="grid content-start gap-x-10 sm:grid-cols-2 lg:col-span-7 lg:pt-4">
+          <ul className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {audiences.map((a, i) => (
-              <li
-                key={a.title}
-                data-reveal
-                style={{ "--i": i } as React.CSSProperties}
-                className="border-t-8 border-gold pb-12 pt-6"
-              >
-                <h3 className="text-2xl font-bold leading-snug text-navy sm:text-3xl">{a.title}</h3>
-                <p className="mt-3 text-lg">{a.body}</p>
+              <li key={a.title} data-reveal style={d(i)}>
+                <span aria-hidden="true" className="pennant mb-6 block h-8 w-20 bg-gold" />
+                <h3 className="font-heading text-2xl font-bold">{a.title}</h3>
+                <p className="mt-3 text-lg text-white/85">{a.body}</p>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* WHAT WE DO */}
-      <section id="what-we-do" aria-labelledby="do-title" className="scroll-mt-20 bg-navy-50 py-24 lg:py-36">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-6 lg:grid-cols-12">
-            <h2 id="do-title" data-reveal className="text-4xl font-bold leading-tight text-navy sm:text-6xl lg:col-span-6">
-              What we do
+      {/* WHAT WE DO: THE ROAD TO COLLEGE */}
+      <section id="road" aria-labelledby="road-title" className="scroll-mt-18 py-24 lg:py-40">
+        <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-12">
+            <h2 id="road-title" data-reveal className="display text-6xl text-navy sm:text-8xl lg:col-span-7">
+              The road to college
             </h2>
-            <p data-reveal style={{ "--i": 1 } as React.CSSProperties} className="text-xl lg:col-span-6 lg:pt-3">
-              We take students from &ldquo;college isn&apos;t for me&rdquo; to an acceptance letter,
-              one campus, one form and one conversation at a time.
+            <p data-reveal style={d(1)} className="text-xl lg:col-span-5 lg:pt-4">
+              What we do, from the first campus tour to graduation day. Students don&apos;t do any of
+              it alone.
             </p>
           </div>
 
-          <div className="mt-16 space-y-20 lg:space-y-28">
-            {programs.map((p, i) => (
-              <article
-                key={p.id}
-                className={`grid items-center gap-8 lg:grid-cols-12 lg:gap-16 ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
-              >
-                <div data-reveal className="relative aspect-[4/3] overflow-hidden lg:col-span-7">
-                  <Image src={p.image} alt={p.alt} fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" />
+          <ol className="relative mt-20 space-y-20 lg:space-y-32">
+            <span aria-hidden="true" className="absolute bottom-0 left-[1.15rem] top-0 w-2 bg-gold lg:left-1/2 lg:-ml-1" />
+            {road.map((r, i) => (
+              <li key={r.id} className="relative grid gap-8 pl-14 lg:grid-cols-2 lg:gap-24 lg:pl-0">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-0 grid size-10 place-items-center bg-midnight lg:left-1/2 lg:top-1/2 lg:-ml-5 lg:-mt-5"
+                >
+                  <span className="pennant block h-4 w-5 bg-gold" />
+                </span>
+                <figure data-reveal="scale" className={i % 2 ? "lg:order-2" : ""}>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-navy">
+                    <Image src={r.image} alt={r.alt} fill sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover object-[50%_25%]" />
+                  </div>
+                  <figcaption className="mt-3 text-base text-ink-soft">{r.caption}</figcaption>
+                </figure>
+                <div data-reveal style={d(1)} className={`self-center ${i % 2 ? "lg:order-1 lg:text-right" : ""}`}>
+                  <h3 className="display text-5xl text-navy sm:text-6xl">{r.title}</h3>
+                  <p className={`mt-5 max-w-xl text-xl ${i % 2 ? "lg:ml-auto" : ""}`}>{r.body}</p>
                 </div>
-                <div data-reveal style={{ "--i": 1 } as React.CSSProperties} className="lg:col-span-5">
-                  <h3 className="text-3xl font-bold leading-tight text-navy sm:text-4xl">{p.title}</h3>
-                  <p className="mt-4 text-xl">{p.body}</p>
-                </div>
-              </article>
+              </li>
             ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* CAMPUSES (live pennant wall) */}
+      <section id="campuses" aria-labelledby="campuses-title" className="scroll-mt-18 bg-midnight py-24 text-white lg:py-36">
+        <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-12">
+            <h2 id="campuses-title" data-reveal className="display text-6xl sm:text-8xl lg:col-span-7">
+              Campuses we&apos;ve visited
+            </h2>
+            <p data-reveal style={d(1)} className="text-xl text-white/90 lg:col-span-5 lg:pt-4">
+              Tap a pennant to see BYI students on campus. Every photo is from a real BYI trip.
+            </p>
+          </div>
+          <div data-reveal style={d(2)} className="mt-16">
+            <PennantWall />
           </div>
         </div>
       </section>
 
       {/* IMPACT */}
-      <div className="bg-navy-50">
-      <section aria-labelledby="impact-title" className="bg-navy py-24 text-white lg:chevron-top lg:pt-[calc(9rem+3.5vw)] lg:pb-36">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid gap-6 lg:grid-cols-12">
-            <h2 id="impact-title" data-reveal className="text-4xl font-bold leading-tight sm:text-6xl lg:col-span-6">
+      <section aria-labelledby="impact-title" className="py-24 lg:py-40">
+        <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-12">
+            <h2 id="impact-title" data-reveal className="display text-6xl text-navy sm:text-8xl lg:col-span-6">
               Our impact
             </h2>
-            <p data-reveal style={{ "--i": 1 } as React.CSSProperties} className="text-xl text-white/90 lg:col-span-6 lg:pt-3">
+            <p data-reveal style={d(1)} className="text-xl lg:col-span-6 lg:pt-4">
               Since {site.founded}, BYI has been showing up in classrooms, on church steps and on
               campus lawns across North Carolina.
             </p>
           </div>
-          <dl className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
+          <dl className="mt-16 grid grid-cols-2 gap-3 lg:grid-cols-4">
             {impact.stats.map((s, i) => (
-              <div key={s.label} data-reveal style={{ "--i": i } as React.CSSProperties} className="flex flex-col-reverse justify-end border-l-8 border-gold pl-5">
-                <dt className="mt-2 text-lg text-white/85">{s.label}</dt>
-                <dd className="font-display text-5xl font-bold tracking-[-0.03em] text-gold sm:text-7xl">
-                  {s.value}
+              <div key={s.label} data-reveal style={d(i)} className="flex flex-col-reverse justify-end bg-white p-6 sm:p-8">
+                <dt className="mt-2 font-heading text-lg font-semibold text-ink-soft">{s.label}</dt>
+                <dd className="display text-6xl text-navy sm:text-8xl">
+                  <CountUp value={s.value} suffix={s.suffix} />
                 </dd>
               </div>
             ))}
           </dl>
           {!impact.confirmed && (
-            <p className="mt-12 text-base text-white/70">Sample figures shown for layout. BYI to confirm before launch.</p>
+            <p className="mt-6 text-base text-ink-soft">Sample figures shown for layout. BYI to confirm before launch.</p>
           )}
+
+          <h3 data-reveal className="display mt-24 text-4xl text-navy sm:text-5xl">Where they are now</h3>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {graduates.map((g, i) => (
+              <li key={g.image} data-reveal="scale" style={d(i)} className={`group relative aspect-[3/4] overflow-hidden bg-navy ${i === 4 ? "hidden lg:block" : ""}`}>
+                <Image
+                  src={g.image}
+                  alt={g.alt}
+                  fill
+                  sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                  className="object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-105"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
-      </div>
 
       {/* PROGRAMS & EVENTS */}
-      <section aria-labelledby="events-title" className="py-24 lg:py-36">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <section aria-labelledby="events-title" className="bg-navy py-24 text-white lg:py-36">
+        <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <h2 id="events-title" data-reveal className="text-4xl font-bold leading-tight text-navy sm:text-6xl">
-              Programs and events
+            <h2 id="events-title" data-reveal className="display text-6xl sm:text-8xl">
+              Programs & events
             </h2>
             <Link
               href="/events"
-              className="inline-flex items-center gap-3 font-display text-lg font-bold text-navy underline decoration-gold decoration-4 underline-offset-8 transition-colors hover:text-navy-500"
+              className="inline-flex items-center gap-3 font-heading text-lg font-bold underline decoration-gold decoration-4 underline-offset-8 transition-colors hover:text-gold"
             >
               All events <Arrow />
             </Link>
           </div>
 
-          <div className="mt-14 grid gap-10 lg:grid-cols-12">
-            <div data-reveal className="bg-gold p-8 text-navy-900 sm:p-10 lg:col-span-5">
-              <h3 className="text-3xl font-bold leading-tight">Next up</h3>
-              <p className="mt-4 text-xl">
-                Our next campus tour and family workshop dates are being set now. Join the list and
-                we&apos;ll tell you first.
+          <article data-reveal className="mt-16 grid gap-0 bg-midnight lg:grid-cols-12">
+            <div className="relative aspect-square lg:col-span-5">
+              <Image src={events[0].image} alt={events[0].alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+            </div>
+            <div className="flex flex-col justify-center p-8 sm:p-12 lg:col-span-7">
+              <p className="font-heading text-lg font-bold text-gold">
+                {events[0].when} · {events[0].where}
               </p>
+              <h3 className="display mt-3 text-5xl sm:text-7xl">{events[0].title}</h3>
+              <p className="mt-5 max-w-xl text-xl text-white/90">{events[0].body}</p>
               <Link
                 href="/contact?topic=events"
-                className="mt-8 inline-flex items-center gap-3 bg-navy px-6 py-3.5 font-display text-lg font-bold text-white transition-[background-color,transform] hover:bg-navy-900 active:scale-[0.97]"
+                className="mt-8 inline-flex items-center gap-3 self-start bg-gold px-7 py-4 font-heading text-lg font-bold text-midnight transition-[background-color,transform] hover:bg-white active:scale-[0.97]"
               >
-                Get event updates <Arrow />
+                Get next year&apos;s date <Arrow />
               </Link>
             </div>
-            <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:col-span-7">
-              {pastEvents.map((e, i) => (
-                <li key={e.title} data-reveal style={{ "--i": i } as React.CSSProperties}>
-                  <h3 className="text-2xl font-bold text-navy">{e.title}</h3>
-                  <p className="mt-2 text-lg">{e.body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </article>
 
-          <div className="mt-16 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
-            {[
-              { src: "/images/nc-at-visit.jpg", alt: "Students at NC A&T" },
-              { src: "/images/campus-dining-hall.jpg", alt: "Students in a college student union" },
-              { src: "/images/church-sunday.jpg", alt: "BYI young men at church with mentors" },
-              { src: "/images/community-service.jpg", alt: "Students on a community service visit" },
-            ].map((img, i) => (
-              <div key={img.src} data-reveal style={{ "--i": i } as React.CSSProperties} className="group relative aspect-square overflow-hidden">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 50vw"
-                  className="object-cover transition-transform duration-700 ease-[var(--ease-out-quart)] group-hover:scale-105"
-                />
-              </div>
+          <ul className="mt-12 grid gap-10 md:grid-cols-3">
+            {events.slice(1).map((e, i) => (
+              <li key={e.id} data-reveal style={d(i)}>
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image src={e.image} alt={e.alt} fill sizes="(min-width: 768px) 30vw, 100vw" className="object-cover" />
+                </div>
+                <p className="mt-5 font-heading font-bold text-gold">{e.when}</p>
+                <h3 className="mt-1 font-heading text-2xl font-bold">{e.title}</h3>
+                <p className="mt-2 text-lg text-white/85">{e.body}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* GET INVOLVED */}
-      <section id="get-involved" aria-labelledby="involved-title" className="scroll-mt-20 bg-navy-900 py-24 text-white lg:py-36">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <h2 id="involved-title" data-reveal className="text-4xl font-bold leading-tight sm:text-6xl">
-            Get involved
-          </h2>
-          <div className="mt-14 grid gap-12 lg:grid-cols-3 lg:gap-14">
-            {[
-              {
-                title: "Apply as a student",
-                body: "High school students who want to go to college, especially first-generation students, can apply in about five minutes.",
-                href: "/apply",
-                cta: "Start your application",
-              },
-              {
-                title: "Mentor or chaperone",
-                body: "Ride along on a campus tour, share your college story, or meet with a student once a month.",
-                href: "/contact?topic=volunteer",
-                cta: "Volunteer with BYI",
-              },
-              {
-                title: "Partner with BYI",
-                body: "Schools, churches, colleges and businesses can host sessions, sponsor tours or open their doors to students.",
-                href: "/contact?topic=partner",
-                cta: "Become a partner",
-              },
-            ].map((c, i) => (
-              <div key={c.title} data-reveal style={{ "--i": i } as React.CSSProperties} className="flex flex-col bg-navy-700 p-8 sm:p-10">
-                <h3 className="text-3xl font-bold leading-tight text-gold">{c.title}</h3>
-                <p className="mt-4 flex-1 text-lg text-white/90">{c.body}</p>
-                <Link
-                  href={c.href}
-                  className="mt-8 inline-flex items-center gap-3 self-start font-display text-lg font-bold text-white underline decoration-gold decoration-4 underline-offset-8 transition-colors hover:text-gold"
-                >
-                  {c.cta} <Arrow />
-                </Link>
-              </div>
-            ))}
+      <section id="get-involved" aria-labelledby="involved-title" className="scroll-mt-18 py-24 lg:py-40">
+        <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
+          <div className="grid gap-8 lg:grid-cols-12">
+            <h2 id="involved-title" data-reveal className="display text-6xl text-navy sm:text-8xl lg:col-span-7">
+              Get involved
+            </h2>
+            <p data-reveal style={d(1)} className="text-xl lg:col-span-5 lg:pt-4">
+              Pick the one that fits you and we&apos;ll show you the next three steps.
+            </p>
+          </div>
+          <div data-reveal style={d(2)} className="mt-14">
+            <PathPicker />
           </div>
         </div>
       </section>
 
       {/* DONATE */}
-      <section id="donate" aria-labelledby="donate-title" className="scroll-mt-20 bg-gold py-24 text-navy-900 lg:py-36">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+      <section id="donate" aria-labelledby="donate-title" className="scroll-mt-18 bg-gold py-24 text-midnight lg:py-36">
+        <div className="mx-auto grid max-w-[90rem] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-12">
           <div className="lg:col-span-6">
-            <h2 id="donate-title" data-reveal className="text-4xl font-bold leading-tight sm:text-6xl">
-              Put a student on the bus to college
+            <h2 id="donate-title" data-reveal className="display text-6xl sm:text-8xl">
+              Fund a seat on the bus
             </h2>
-            <p data-reveal style={{ "--i": 1 } as React.CSSProperties} className="mt-6 max-w-xl text-xl">
+            <p data-reveal style={d(1)} className="mt-6 max-w-xl text-xl">
               Your gift pays for campus tours, application fees, family workshops and the mentors who
               keep students on track. Give once, or join our monthly givers.
             </p>
-            <div data-reveal style={{ "--i": 2 } as React.CSSProperties} className="relative mt-10 aspect-[4/3] overflow-hidden">
+            <div data-reveal style={d(2)} className="relative mt-10 aspect-[4/3] overflow-hidden">
               <Image
-                src="/images/campus-dining-hall.jpg"
-                alt="BYI students and founder James Benton during a college campus visit"
+                src="/images/team-day.jpg"
+                alt="BYI young men in matching yellow shirts celebrating with James Benton"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
               />
             </div>
           </div>
-          <div data-reveal style={{ "--i": 1 } as React.CSSProperties} className="lg:col-span-6 lg:pt-4">
+          <div data-reveal style={d(1)} className="lg:col-span-6 lg:pt-4">
             <DonateBlock />
           </div>
         </div>
