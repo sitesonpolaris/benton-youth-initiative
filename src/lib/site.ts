@@ -101,7 +101,7 @@ export const road = [
     id: "graduate", 
     title: "Walk across the stage",
     body: "We stay in touch through high school graduation and beyond, with mentors, check-ins and a community that shows up for every milestone.",
-    image: "/images/grad-ncat.jpg",
+    image: "/images/grad-ncat-edited.jpg",
     alt: "A BYI graduate in a blue and gold North Carolina A&T cap and gown standing with James Benton",
     caption: "Graduation day at North Carolina A&T",
   },
