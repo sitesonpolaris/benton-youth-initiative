@@ -131,7 +131,7 @@ export const campuses = [
     short: "A&T",
     name: "North Carolina A&T State University",
     city: "Greensboro",
-    image: "/images/ncat-visit.jpg",
+    image: "/images/ncat-visit-edited.jpg",
     alt: "James Benton with young men standing on an Aggie logo floor at North Carolina A&T",
     caption: "Standing on the Aggie floor at North Carolina A&T.",
   },
