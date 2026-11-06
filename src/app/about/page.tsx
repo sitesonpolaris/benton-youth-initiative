@@ -50,7 +50,7 @@ export default function AboutPage() {
             </div>
           </div>
           <figure data-reveal="scale" style={d(2)} className="lg:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden bg-midnight">
+            <div className="relative aspect-[4/5] overflow-hidden">
               <Image
                 src="/images/james-benton.jpg"
                 alt="Portrait of BYI founder James Alex Benton"
