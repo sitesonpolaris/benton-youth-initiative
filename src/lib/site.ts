@@ -149,7 +149,7 @@ export const campuses = [
     short: "Clinton",
     name: "Clinton College",
     city: "Rock Hill, SC",
-    image: "/images/clinton-gym.jpg",
+    image: "/images/clinton-gym-edited.jpg",
     alt: "James Benton with Clinton College staff in a college gym",
     caption: "With friends of BYI at Clinton College.",
   },
