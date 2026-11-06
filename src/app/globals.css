@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #27374b;
+  --color-navy-800: #1e2b3c;
+  --color-navy-600: #3a4d66;
+  --color-navy-300: #8d9bb0;
+  --color-midnight: #131c28;
+  --color-gold: #eed44f;
+  --color-gold-deep: #d6b92a;
+  --color-gold-soft: #fbf1c4;
+  --color-paper: #f6f3ea;
+  --color-paper-deep: #ebe5d5;
+  --color-ink: #131c28;
+  --color-ink-soft: #4a5566;
+
+  --font-display: var(--font-cabin-condensed), "Cabin Condensed", "Cabin", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-cabin), "Cabin", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), "Source Sans Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 1.125rem;
+    line-height: 1.55;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-midnight);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Big condensed collegiate display type */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.9;
+}
+
+/* Pennant: the crest's chevron turned into a college pennant */
+@utility pennant {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+@utility pennant-tail {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 50%, 100% 100%, 0 100%);
+}
+@utility chevron-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 50% 100%, 0 calc(100% - 4vw));
+}
+
+/* Reveal on scroll. Content is hidden only after JS marks the document. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 800ms var(--ease-out-expo),
+    transform 800ms var(--ease-out-expo);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="left"] {
+  transform: translateX(-36px);
+}
+.js [data-reveal="scale"] {
+  transform: scale(0.96);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes pennant-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-2.5deg);
+  }
+}
+.pennant-wave {
+  transform-origin: 0 50%;
+  animation: pennant-wave 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .pennant-wave,
+  [data-anim] {
+    animation: none !important;
+  }
+}

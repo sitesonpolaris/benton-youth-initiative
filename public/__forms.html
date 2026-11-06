@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><meta charset="utf-8" /><title>Forms</title></head>
+  <body>
+    <!-- Netlify Forms detection. Keep field names in sync with src/app/apply and src/app/contact. -->
+    <form name="apply" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="first-name" /><input name="last-name" /><input name="email" type="email" /><input name="phone" />
+      <input name="high-school" /><input name="grade" /><input name="guardian" /><input name="guardian-phone" />
+      <input name="interests" /><textarea name="goals"></textarea>
+    </form>
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="first-name" /><input name="last-name" /><input name="email" type="email" /><input name="phone" />
+      <input name="topic" /><textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
