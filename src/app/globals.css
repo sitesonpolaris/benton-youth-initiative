@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #27374b;
+  --color-navy-950: #141d29;
+  --color-navy-900: #1b2636;
+  --color-navy-700: #34475f;
+  --color-navy-500: #5b6d85;
+  --color-navy-100: #e4e8ee;
+  --color-navy-50: #f1f3f6;
+  --color-gold: #eed44f;
+  --color-gold-600: #d8bb2c;
+  --color-gold-100: #fbf3c8;
+  --color-paper: #ffffff;
+  --color-ink: #1b2636;
+  --color-ink-soft: #46546a;
+
+  --font-display: var(--font-cabin), "Cabin", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), "Source Sans Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 1.125rem;
+    line-height: 1.55;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy-900);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* The crest's chevron, used as the page's one motif. */
+@utility chevron-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.5vw), 50% 100%, 0 calc(100% - 3.5vw));
+}
+@utility chevron-top {
+  clip-path: polygon(0 0, 50% 3.5vw, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Reveal on scroll. Hidden only once JS has marked the document, so content never sticks hidden. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms var(--ease-out-quart),
+    transform 700ms var(--ease-out-quart);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+.hero-photo {
+  animation: hero-drift 18s var(--ease-out-quart) both;
+}
+@keyframes hero-drift {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-photo {
+    animation: none;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [role="tabpanel"] {
+    animation: none !important;
+  }
+}
