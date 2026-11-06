@@ -35,6 +35,8 @@ export const metadata: Metadata = {
   },
   description:
     "Benton Youth Initiative (BYI) is a North Carolina nonprofit that partners with Title I schools to get first-generation and at-risk students onto HBCU campuses and into college.",
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     siteName: site.name,

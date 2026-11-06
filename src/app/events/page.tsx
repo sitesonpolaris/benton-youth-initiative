@@ -5,6 +5,7 @@ import { PageHero } from "@/components/PageHero";
 import { pastEvents } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/events" },
   title: "Events",
   description: "HBCU campus tours, family workshops, the All White Gala and community service days with Benton Youth Initiative.",
 };

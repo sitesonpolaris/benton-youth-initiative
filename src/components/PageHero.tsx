@@ -24,7 +24,7 @@ export function PageHero({
         </div>
         {image && (
           <div className="relative aspect-[4/3] overflow-hidden lg:col-span-6">
-            <Image src={image} alt={alt ?? ""} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="hero-photo object-cover" />
+            <Image src={image} alt={alt ?? ""} aria-hidden={alt ? undefined : true} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="hero-photo object-cover" />
           </div>
         )}
       </div>

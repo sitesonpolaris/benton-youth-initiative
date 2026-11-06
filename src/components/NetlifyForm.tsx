@@ -56,7 +56,7 @@ export function NetlifyForm({
       <input type="hidden" name="form-name" value={name} />
       <p hidden>
         <label>
-          Don&apos;t fill this out: <input name="bot-field" />
+          Don&apos;t fill this out: <input type="text" name="bot-field" tabIndex={-1} autoComplete="off" />
         </label>
       </p>
       {children}

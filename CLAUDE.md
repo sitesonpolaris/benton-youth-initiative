@@ -6,7 +6,11 @@ Redesign of https://www.bentonyouthinitiative.org (old site: Wix). Built by Site
 Next.js 16 (App Router, TS) + Tailwind v4 (`@theme` tokens in `src/app/globals.css`). Static, no database.
 Content lives in `src/lib/site.ts`. Fonts via `next/font/local` (woff2 from `@fontsource/cabin` and `@fontsource/source-sans-3`).
 Forms: Netlify Forms (`apply`, `contact`), detected from `public/__forms.html` — keep field names in sync.
-Deploy: Netlify with `@netlify/plugin-nextjs` (`netlify.toml`). Not yet linked/deployed.
+Deploy: Netlify with `@netlify/plugin-nextjs` (`netlify.toml`).
+- Live (preview): https://benton-youth-initiative.netlify.app
+- Netlify project `benton-youth-initiative`, team `sitesonpolaris`, site id `52629077-82ac-4853-b35d-a307815ea606`. Forms enabled (`apply`, `contact` detected).
+- NOT yet linked to GitHub for continuous deploy. Link it in the Netlify dashboard (Project configuration → Build & deploy → Link repository → `sitesonpolaris/benton-youth-initiative`, branch `main`). After that, all changes go through the repo.
+- Canonical URLs point at www.bentonyouthinitiative.org (the future custom domain).
 
 ## Identity
 - Colors: navy `#27374b` (brand), navy-900 `#1b2636`, navy-950 `#141d29`, navy-700 `#34475f`, navy-50 `#f1f3f6`; gold `#eed44f` (brand), gold-600 `#d8bb2c`. Gold is used as a fill (with navy text), never as text on white.

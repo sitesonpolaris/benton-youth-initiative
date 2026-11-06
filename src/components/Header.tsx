@@ -22,7 +22,7 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-navy text-white">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Link href="/" className="flex items-center gap-3" aria-label="Benton Youth Initiative home">
-          <Image src="/images/byi-crest.png" alt="" width={44} height={44} priority className="size-11" />
+          <Image src="/images/byi-crest.png" alt="" aria-hidden="true" width={44} height={44} priority className="size-11" />
           <span className="font-display text-lg font-bold leading-tight tracking-tight">
             Benton Youth
             <br className="sm:hidden" /> Initiative

@@ -5,6 +5,7 @@ import { PageHero } from "@/components/PageHero";
 import { board, site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About BYI",
   description:
     "The story, mission and board of Benton Youth Initiative, a North Carolina nonprofit founded by James Alex Benton to help first-generation students reach college.",

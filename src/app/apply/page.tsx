@@ -3,6 +3,7 @@ import { PageHero } from "@/components/PageHero";
 import { Checks, Field, NetlifyForm, Select, TextArea } from "@/components/NetlifyForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/apply" },
   title: "Apply",
   description: "Apply to the Benton Youth Initiative program for campus tours, mentoring, scholarships and college application support.",
 };

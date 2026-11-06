@@ -5,6 +5,7 @@ import { TopicSelect } from "@/components/TopicSelect";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact",
   description: "Contact Benton Youth Initiative about student support, partnerships, volunteering, events or donations.",
 };
