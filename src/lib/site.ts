@@ -213,15 +213,24 @@ export const events = [
   },
 ];
 
-export const board = [
+// Contact details from the old /staff page (tel/mailto link targets, not the
+// placeholder "(704) 806-4102" link text). CONFIRM: Pierce and Smith had placeholder
+// phone links (555-555-5555) so no phone is shown; Thompson's listed email is
+// jalexbenton@yahoo.com (possibly Mr. Benton's); Jerrell's number matches the
+// template's placeholder text.
+export type BoardMember = { name: string; role: string; phone?: string; email?: string };
+
+export const board: BoardMember[] = [
   { name: "James Alex Benton", role: "Founder" },
-  { name: "Dr. John T. McCoy", role: "Nazareth Baptist Church" },
-  { name: "Ms. Shawn Pierce", role: "Secretary" },
-  { name: "Ms. Kai Jerrell", role: "Owner, Speechworks Therapy" },
-  { name: "Ms. Garrette Smith", role: "Board Member" },
-  { name: "Mr. Rodrigues Thompson", role: "Board Member" },
-  { name: "Coach David Bowser", role: "Football Coach, Johnson C. Smith University" },
+  { name: "Dr. John T. McCoy", role: "Nazareth Baptist Church", phone: "(803) 328-8349", email: "mccjo8@yahoo.com" },
+  { name: "Ms. Shawn Pierce", role: "Secretary", email: "shawn.l.pierce@gmail.com" },
+  { name: "Ms. Kai Jerrell", role: "Owner, Speechworks Therapy", phone: "(704) 806-4102", email: "kai@speechworkstherapy.com" },
+  { name: "Ms. Garrette Smith", role: "Board Member", email: "garretteesmith@gmail.com" },
+  { name: "Mr. Rodrigues Thompson", role: "Board Member", phone: "(917) 370-7402", email: "jalexbenton@yahoo.com" },
+  { name: "Coach David Bowser", role: "Football Coach, Johnson C. Smith University", phone: "(919) 244-9316", email: "dbowser@jcsu.edu" },
 ];
+
+export const telHref = (phone: string) => `tel:+1${phone.replace(/\D/g, "")}`;
 
 export const paths = [
   {

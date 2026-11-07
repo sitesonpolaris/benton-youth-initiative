@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { board, site } from "@/lib/site";
+import { board, site, telHref } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -125,9 +125,41 @@ export default function AboutPage() {
           </div>
           <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-8">
             {board.map((m, i) => (
-              <li key={m.name} data-reveal style={d(i % 4)} className="bg-paper p-7">
+              <li key={m.name} data-reveal style={d(i % 4)} className="flex flex-col bg-paper p-7">
                 <p className="font-heading text-2xl font-bold text-navy">{m.name}</p>
                 <p className="mt-1 text-lg text-ink-soft">{m.role}</p>
+                {(m.phone || m.email) && (
+                  <ul className="mt-5 space-y-1.5 text-lg">
+                    {m.phone && (
+                      <li>
+                        <a
+                          href={telHref(m.phone)}
+                          className="inline-flex items-center gap-2.5 font-semibold text-navy underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-navy-600"
+                        >
+                          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" className="shrink-0">
+                            <path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" />
+                          </svg>
+                          <span className="sr-only">Call {m.name} at </span>
+                          {m.phone}
+                        </a>
+                      </li>
+                    )}
+                    {m.email && (
+                      <li>
+                        <a
+                          href={`mailto:${m.email}?subject=${encodeURIComponent("Hello from BYI's website")}`}
+                          className="inline-flex items-center gap-2.5 break-all text-navy underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-navy-600"
+                        >
+                          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" className="shrink-0">
+                            <path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.4 7H19.6zM4 8.9V17h16V8.9l-8 5.5z" />
+                          </svg>
+                          <span className="sr-only">Email {m.name} at </span>
+                          {m.email}
+                        </a>
+                      </li>
+                    )}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

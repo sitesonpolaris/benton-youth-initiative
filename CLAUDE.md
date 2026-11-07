@@ -40,7 +40,7 @@ Real BYI photos from the owner's Google Drive (folder 12UpAuWMOmgcglYboy9AmP0MDi
 - Founding year: old site says both 1994 and 2016 (using 2016).
 - Email `info@bentonyouthinitative.com` — domain spelling differs from the website domain.
 - Legal name and 501(c)(3) EIN.
-- Board list from the old /staff page; personal emails/phones intentionally left off.
+- Board contact info (About → Our board) copied from the old /staff page using the real tel/mailto targets. Confirm: Pierce and Smith had placeholder phones (555-555-5555, omitted); Thompson's email is jalexbenton@yahoo.com (likely Mr. Benton's, a Wix copy error?); Jerrell's (704) 806-4102 is also the template's placeholder link text; McCoy's (803) 328-8349 was hidden behind placeholder text. Get each member's OK to publish personal contact details.
 
 ## Redirects
 `/byi-events` → `/events`, `/staff` → `/about#board` (next.config.ts).
