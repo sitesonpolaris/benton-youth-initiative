@@ -74,9 +74,9 @@ export default function Home() {
       <section aria-labelledby="mission-title" className="py-24 lg:py-40">
         <div className="mx-auto grid max-w-[90rem] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16 lg:px-12">
           <figure data-reveal="left" className="lg:col-span-5">
-            <div className="relative aspect-square overflow-hidden bg-midnight">
+            <div className="relative aspect-square overflow-hidden">
               <Image
-                src="/images/james-benton.jpg"
+                src="/images/james-benton-2.jpg"
                 alt="Portrait of BYI founder James Alex Benton"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
