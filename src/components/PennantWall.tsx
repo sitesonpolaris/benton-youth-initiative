@@ -28,7 +28,7 @@ export function PennantWall() {
                 on ? "translate-x-3" : "hover:translate-x-1.5"
               }`}
             >
-              <span aria-hidden="true" className={`w-4 shrink-0 ${on ? "bg-gold" : "bg-navy-600"}`} />
+              <span aria-hidden="true" className={`relative z-10 -mr-px w-4 shrink-0 ${on ? "bg-gold" : "bg-navy-600"}`} />
               <span
                 className={`pennant flex flex-1 items-center pl-5 pr-[35%] transition-colors duration-300 ${
                   on ? "bg-gold text-midnight" : "bg-navy text-white group-hover:bg-navy-600"
