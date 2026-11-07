@@ -76,7 +76,7 @@ export default function Home() {
           <figure data-reveal="left" className="lg:col-span-5">
             <div className="relative aspect-square overflow-hidden">
               <Image
-                src="/images/james-benton-2.png"
+                src="/images/james-benton-2.jpg"
                 alt="Portrait of BYI founder James Alex Benton"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
